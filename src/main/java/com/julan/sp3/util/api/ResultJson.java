@@ -75,8 +75,8 @@ public class ResultJson<T> {
     /**
      * 参数验证失败返回结果
      */
-    public static <T> ResultJson<T> validateFailed() {
-        return new ResultJson<T>(ResultCode.E_422.getCode(), ResultCode.E_422.getMessage(), null);
+    public static <T> ResultJson<T> validateFailed(String message) {
+        return new ResultJson<T>(ResultCode.E_422.getCode(), message, null);
     }
 
     /**

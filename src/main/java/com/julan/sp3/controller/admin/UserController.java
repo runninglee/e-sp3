@@ -1,10 +1,8 @@
 package com.julan.sp3.controller.admin;
 
-import com.alibaba.fastjson.JSON;
-import com.fasterxml.jackson.databind.json.JsonMapper;
 import com.julan.sp3.bo.user.CreateUserBo;
-import com.julan.sp3.exception.GraceException;
 import com.julan.sp3.util.api.ResultJson;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Map;
@@ -64,8 +62,8 @@ public class UserController {
 
     @PostMapping("/t/save")
     @ResponseBody
-    public ResultJson<Object> t(CreateUserBo createUserBo) {
+    public ResultJson<Object> t(@Validated CreateUserBo createUserBo) {
 //                GraceException.display("飒飒",555);
-        return ResultJson.success(JSON.toJSON(createUserBo));
+        return ResultJson.success(createUserBo);
     }
 }
