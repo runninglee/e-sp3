@@ -1,4 +1,4 @@
-package com.julan.sp3.utils.api;
+package com.julan.sp3.util.api;
 
 public class ResultJson<T> {
     private long code;

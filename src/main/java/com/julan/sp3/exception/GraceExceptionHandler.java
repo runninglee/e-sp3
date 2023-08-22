@@ -1,6 +1,6 @@
 package com.julan.sp3.exception;
 
-import com.julan.sp3.utils.api.ResultJson;
+import com.julan.sp3.util.api.ResultJson;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;

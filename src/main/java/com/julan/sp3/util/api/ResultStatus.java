@@ -1,4 +1,4 @@
-package com.julan.sp3.utils.api;
+package com.julan.sp3.util.api;
 
 import org.springframework.core.MethodParameter;
 import org.springframework.http.HttpStatus;

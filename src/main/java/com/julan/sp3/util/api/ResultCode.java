@@ -1,4 +1,4 @@
-package com.julan.sp3.utils.api;
+package com.julan.sp3.util.api;
 
 public enum ResultCode implements ErrorCode {
     E_200(200, "请求成功"),
