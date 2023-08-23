@@ -29,7 +29,7 @@ public class CreateUserBo {
     private String mobile;
 
     @NotBlank(message = "身份证号不能为空", groups = AvatarGroup.class)
-    @IdCard(groups = AvatarGroup.class)
+//    @IdCard(groups = AvatarGroup.class)
     private String avatar;
 
     @NotNull(message = "用户状态不能为空", groups = StatusGroup.class)

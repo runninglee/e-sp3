@@ -2,9 +2,9 @@ package com.julan.sp3.bo.user;
 
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import com.julan.sp3.bo.user.group.MobileGroup;
-import com.julan.sp3.bo.user.group.PasswordGroup;
 import com.julan.sp3.bo.user.group.StatusGroup;
 import com.julan.sp3.bo.user.group.UsernameGroup;
+import jakarta.persistence.Id;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
@@ -13,11 +13,16 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.Date;
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @JsonPropertyOrder(value = {"username", "password", "mobile", "status"})
 public class UpdateUserBo {
+
+    @Id
+    private long id;
 
     @NotBlank(message = "用户名不能为空", groups = UsernameGroup.class)
     private String username;
@@ -29,6 +34,12 @@ public class UpdateUserBo {
 
     @NotNull(message = "用户状态不能为空", groups = StatusGroup.class)
     private boolean status;
+
+    private String avatar;
+    
+    private boolean is_admin;
+
+    private Date updated_at;
 }
 
 

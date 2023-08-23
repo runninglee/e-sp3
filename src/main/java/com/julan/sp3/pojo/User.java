@@ -1,40 +1,63 @@
 package com.julan.sp3.pojo;
 
-import jakarta.persistence.Column;
 import jakarta.persistence.*;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 
-
+@EqualsAndHashCode(callSuper = true)
 @Data
-public class User {
+@Entity
+@Table(name = "user")
+public class User extends BaseEntity {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    /**
-     * 用户名
-     */
+    @Column(name = "username")
     private String username;
 
-    /**
-     * 登录手机号
-     */
+    @Column(name = "mobile")
     private String mobile;
 
-    /**
-     * 用户密码
-     */
     private String password;
 
-    /**
-     * 0 是禁用,1 是启用
-     */
-    private Boolean status;
+    private String avatar;
 
-    @Column(name = "created_at")
-    private Date createdAt;
+    private int role_id;
 
-    @Column(name = "updated_at")
-    private Date updatedAt;
+    private String keywords;
+
+    @Column(name = "is_admin")
+    private boolean is_admin;
+
+    @Column(name = "status")
+    private boolean status;
+
+    @Column(name = "expired_at")
+    @Temporal(TemporalType.TIMESTAMP)
+    private LocalDateTime expired_at;
+
+    @PrePersist
+    protected void onCreate() {
+        keywords = username + mobile;
+        expired_at = LocalDateTime.now();
+    }
+
+    @PreUpdate
+    protected void onUpdate() {
+        keywords = username + mobile;
+        expired_at = LocalDateTime.now();
+    }
+
+    @PreRemove
+    protected void onDelete() {
+        expired_at = LocalDateTime.now();
+    }
+
 }

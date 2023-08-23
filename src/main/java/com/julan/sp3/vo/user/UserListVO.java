@@ -25,7 +25,6 @@ public class UserListVO {
 
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     private Date updated_at;
-
     //dataList 不为空的时候输出
     @JsonInclude(JsonInclude.Include.NON_NULL)
     private List<User> dataList;
