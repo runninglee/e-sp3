@@ -5,7 +5,7 @@ import com.julan.sp3.bo.user.UpdateUserBo;
 import com.julan.sp3.exception.GraceException;
 import com.julan.sp3.pojo.User;
 import com.julan.sp3.repository.user.UserRepository;
-import com.julan.sp3.service.UserService;
+import com.julan.sp3.service.BaseService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -16,13 +16,21 @@ import org.springframework.transaction.annotation.Transactional;
 
 
 @Service
-public class UserServiceImpl implements UserService {
+public class UserServiceImpl implements BaseService {
 
     @Autowired
     private UserRepository userRepository;
 
     public Page<User> getListUser(Pageable pageable) {
         return userRepository.findAll(pageable);
+    }
+    
+    public User find(Long id) {
+        User user = userRepository.findById(id).orElse(null);
+        if (user == null) {
+            GraceException.display("数据不存在");
+        }
+        return user;
     }
 
     @Transactional(propagation = Propagation.SUPPORTS)
@@ -49,13 +57,5 @@ public class UserServiceImpl implements UserService {
             GraceException.display("数据不存在");
         }
         userRepository.deleteById(id);
-    }
-
-    public User find(Long id) {
-        User user = userRepository.findById(id).orElse(null);
-        if (user == null) {
-            GraceException.display("数据不存在");
-        }
-        return user;
     }
 }
