@@ -16,7 +16,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@JsonPropertyOrder(value = {"username", "password", "mobile", "status"})
+@JsonPropertyOrder(value = {"username", "password", "status", "mobile"})
 public class CreateUserBo {
 
     @NotBlank(message = "用户名不能为空", groups = UsernameGroup.class)
