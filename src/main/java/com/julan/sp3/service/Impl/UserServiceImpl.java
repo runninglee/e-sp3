@@ -1,22 +1,22 @@
-package com.julan.sp3.service.Impl;
+package com.julan.sp3.service.impl;
 
 import com.julan.sp3.bo.user.CreateUserBo;
 import com.julan.sp3.bo.user.UpdateUserBo;
 import com.julan.sp3.exception.GraceException;
 import com.julan.sp3.pojo.User;
 import com.julan.sp3.repository.user.UserRepository;
+import com.julan.sp3.service.UserService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
-
 @Service
 public class UserServiceImpl implements UserService {
+
     @Autowired
     private UserRepository userRepository;
-
 
     @Transactional(propagation = Propagation.SUPPORTS)
     public User create(CreateUserBo createUserBo) {

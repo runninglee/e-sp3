@@ -3,12 +3,7 @@ package com.julan.sp3.pojo;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-import org.springframework.data.annotation.CreatedDate;
-import org.springframework.data.annotation.LastModifiedDate;
-import org.springframework.data.jpa.domain.support.AuditingEntityListener;
-
 import java.time.LocalDateTime;
-import java.util.Date;
 
 @EqualsAndHashCode(callSuper = true)
 @Data
@@ -59,5 +54,4 @@ public class User extends BaseEntity {
     protected void onDelete() {
         expired_at = LocalDateTime.now();
     }
-
 }
