@@ -18,13 +18,14 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 public class UserServiceImpl implements BaseService {
 
+
     @Autowired
     private UserRepository userRepository;
 
     public Page<User> getListUser(Pageable pageable) {
         return userRepository.findAll(pageable);
     }
-    
+
     public User find(Long id) {
         User user = userRepository.findById(id).orElse(null);
         if (user == null) {

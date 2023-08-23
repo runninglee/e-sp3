@@ -4,6 +4,7 @@ import com.julan.sp3.bo.user.CreateUserBo;
 import com.julan.sp3.bo.user.CreateUserBoGroup;
 import com.julan.sp3.bo.user.UpdateUserBo;
 import com.julan.sp3.bo.user.UpdateUserBoGroup;
+import com.julan.sp3.exception.GraceException;
 import com.julan.sp3.pojo.User;
 import com.julan.sp3.service.impl.UserServiceImpl;
 import com.julan.sp3.util.api.ResultJson;
@@ -12,6 +13,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.Map;
 
 @RestController
 @RequestMapping("/admin/users")
@@ -53,7 +56,7 @@ public class UserController extends AdminController {
     }
 
 
-//    @GetMapping("/t/{id}")
+    //    @GetMapping("/t/{id}")
 //    @ResponseBody
 //    public String t(@PathVariable String id) {
 //        return id;
@@ -71,12 +74,12 @@ public class UserController extends AdminController {
 //        return id.toString();
 //    }
 //
-//    @PostMapping("/t/grace")
-//    @ResponseBody
-//    public String grace(@RequestParam Map<String, Object> params) {
-//        GraceException.display("飒飒" + params.toString(), 555);
-//        return params.toString();
-//    }
+    @PostMapping("/t/grace")
+    @ResponseBody
+    public String grace(@RequestParam Map<String, Object> params) {
+        GraceException.display("飒飒" + params.get("name"), 555);
+        return params.toString();
+    }
 //
 //    @PostMapping("/t/save")
 //    @ResponseBody
