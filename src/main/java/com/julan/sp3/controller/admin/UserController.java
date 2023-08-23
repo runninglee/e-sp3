@@ -2,6 +2,7 @@ package com.julan.sp3.controller.admin;
 
 import com.julan.sp3.bo.user.CreateUserBo;
 import com.julan.sp3.bo.user.CreateUserBoGroup;
+import com.julan.sp3.exception.GraceException;
 import com.julan.sp3.util.api.ResultJson;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -10,7 +11,7 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("/admin/users")
-public class UserController {
+public class UserController extends AdminController {
 
     @GetMapping
     @ResponseBody
@@ -61,10 +62,16 @@ public class UserController {
         return id.toString() + params.toString();
     }
 
+    @PostMapping("/t/grace")
+    @ResponseBody
+    public String grace(@RequestParam Map<String, Object> params) {
+        GraceException.display("飒飒" + params.toString(), 555);
+        return params.toString();
+    }
+
     @PostMapping("/t/save")
     @ResponseBody
     public ResultJson<Object> t(@Validated(CreateUserBoGroup.class) CreateUserBo createUserBo) {
-//                GraceException.display("飒飒",555);
         return ResultJson.success(createUserBo);
     }
 }
