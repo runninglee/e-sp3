@@ -1,6 +1,7 @@
 package com.julan.sp3.controller.admin;
 
 import com.julan.sp3.bo.user.CreateUserBo;
+import com.julan.sp3.bo.user.CreateUserBoGroup;
 import com.julan.sp3.util.api.ResultJson;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -62,7 +63,7 @@ public class UserController {
 
     @PostMapping("/t/save")
     @ResponseBody
-    public ResultJson<Object> t(@Validated CreateUserBo createUserBo) {
+    public ResultJson<Object> t(@Validated(CreateUserBoGroup.class) CreateUserBo createUserBo) {
 //                GraceException.display("飒飒",555);
         return ResultJson.success(createUserBo);
     }

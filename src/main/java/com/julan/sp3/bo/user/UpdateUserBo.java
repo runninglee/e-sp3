@@ -17,13 +17,10 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @JsonPropertyOrder(value = {"username", "password", "mobile", "status"})
-public class CreateUserBo {
+public class UpdateUserBo {
 
     @NotBlank(message = "用户名不能为空", groups = UsernameGroup.class)
     private String username;
-
-    @NotBlank(message = "用户密码不能为空", groups = PasswordGroup.class)
-    private String password;
 
     @NotBlank(message = "手机号码不能为空", groups = MobileGroup.class)
     @Size(min = 11, max = 11, message = "手机号码长度不正确", groups = MobileGroup.class)

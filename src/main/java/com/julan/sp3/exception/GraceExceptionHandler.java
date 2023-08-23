@@ -42,7 +42,6 @@ public class GraceExceptionHandler {
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResultJson<Object> handler(MethodArgumentNotValidException e) {
-
         List<FieldError> errors = e.getFieldErrors();
         return ResultJson.validateFailed(errors.get(0).getDefaultMessage());
     }

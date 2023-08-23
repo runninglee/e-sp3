@@ -34,8 +34,7 @@ public class AES {
 
     //测试
     public static void main(String[] args) {
-        String decryptString = AES.decrypt("ovdBQjIrdMz3zYAPKqptqbdS+Z412OrVOXGWI3RqowI=",
-                "HuYJ3nTV6VVeryHH");
+        String decryptString = AES.decrypt("wdlFmbzSLNZBaV5FELc692p2PLhGRxHpiG17Sw3QGVo=", "HuYJ3nTV6VVeryHH");
         System.out.println("解密结果集：" + decryptString);
     }
 }
