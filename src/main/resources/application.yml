@@ -26,3 +26,9 @@ spring:
   devtools:
     restart:
       enabled: true
+  data:
+    web:
+      pageable:
+        size-parameter: pageSize
+      sort:
+        sort-parameter: orderBy

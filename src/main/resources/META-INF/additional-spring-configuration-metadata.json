@@ -4,5 +4,10 @@
       "name": "server",
       "type": "java.lang.String",
       "description": "Description for server."
-  }
-] }
+    },
+    {
+      "name": "spring.data.web.pageable",
+      "type": "java.lang.String",
+      "description": "Description for spring.data.web.pageable."
+    }
+  ] }

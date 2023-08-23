@@ -8,6 +8,8 @@ import com.julan.sp3.pojo.User;
 import com.julan.sp3.service.impl.UserServiceImpl;
 import com.julan.sp3.util.api.ResultJson;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
@@ -20,8 +22,8 @@ public class UserController extends AdminController {
 
     @GetMapping
     @ResponseBody
-    public String index() {
-        return "index";
+    public ResultJson<Page<User>> index(Pageable pageable) {
+        return ResultJson.success(userService.getListUser(pageable));
     }
 
     @GetMapping("/{id}")
