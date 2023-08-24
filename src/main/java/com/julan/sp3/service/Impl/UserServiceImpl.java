@@ -6,8 +6,8 @@ import com.julan.sp3.bo.user.UpdateUserBo;
 import com.julan.sp3.exception.GraceException;
 import com.julan.sp3.pojo.User;
 import com.julan.sp3.repository.user.UserRepository;
-import com.julan.sp3.repository.user.UserSpecifications;
 import com.julan.sp3.service.BaseService;
+import jakarta.persistence.criteria.Predicate;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -19,37 +19,31 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
+import java.util.List;
+
 
 @Service
 public class UserServiceImpl implements BaseService {
 
-
     @Autowired
     private UserRepository userRepository;
 
-    public Page<User> getList(QueryUserBo queryUserBo) {
+    public Page<User> getList(QueryUserBo bo) {
 
-//        Specification<User> spec = (root, query, criteriaBuilder) -> {
-//
-//            if(queryUserBo.getKeywords() != null){
-//                criteriaBuilder.like(root.get("keywords"), "%" + queryUserBo.getKeywords() + "%");
-//            }
-//
-//            if(queryUserBo.getStatus() >=0){
-//                criteriaBuilder.equal(root.get("status"), queryUserBo.getStatus());
-//            }
-//            return criteriaBuilder.like(root.get("keywords"), "%" + queryUserBo.getKeywords() + "%");
-//        };
-
-
-        Specification<User> spec = Specification.where(null);
-
-        spec.and(UserSpecifications.hasKeywords(queryUserBo.getKeywords()));
-
-        spec.and(UserSpecifications.hasStatus(queryUserBo.getStatus()));
-
-        Pageable pageable = PageRequest.of(queryUserBo.getPage(), queryUserBo.getPageSize(), Sort.by(Sort.Direction.ASC, "id"));
-
+        Specification<User> spec = (root, query, cb) -> {
+            List<Predicate> predicateList = new ArrayList<>();
+            if (bo.getKeywords() != null) {
+                Predicate whereKeywords = cb.like(root.get("keywords"), "%" + bo.getKeywords() + "%");
+                predicateList.add(whereKeywords);
+            }
+            if (bo.getStatus() >= 0) {
+                Predicate whereStatus = cb.equal(root.get("status"), bo.getStatus());
+                predicateList.add(whereStatus);
+            }
+            return cb.and(predicateList.toArray(new Predicate[0]));
+        };
+        Pageable pageable = PageRequest.of(bo.getPage(), bo.getPageSize(), Sort.by(Sort.Direction.fromString(bo.getDirection()), bo.getOrder()));
         return userRepository.findAll(spec, pageable);
     }
 

@@ -1,4 +1,4 @@
-package com.julan.sp3.util.validator.IdCard;
+package com.julan.sp3.util.validator.Mobile;
 
 import jakarta.validation.Constraint;
 import jakarta.validation.Payload;
@@ -10,10 +10,10 @@ import java.lang.annotation.Target;
 
 @Target({ElementType.FIELD, ElementType.METHOD})
 @Retention(RetentionPolicy.RUNTIME)
-@Constraint(validatedBy = IdCardValidator.class)
-public @interface IdCard {
+@Constraint(validatedBy= MobileValidator.class)
+public @interface Mobile {
 
-    String message() default "身份证号码格式不对";
+    String message() default "手机号格式错误";
 
     Class<?>[] groups() default {};
 
