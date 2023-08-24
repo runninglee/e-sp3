@@ -33,11 +33,19 @@ public class UpdateUserBo {
     private String mobile;
 
     @NotNull(message = "用户状态不能为空", groups = StatusGroup.class)
-    private boolean status;
+    private int status;
 
     private String avatar;
-    
-    private boolean is_admin;
+
+    private int is_admin;
+
+    private String password;
+
+    private String ip;
+
+    private int role_id;
+
+    private String location;
 
     private Date updated_at;
 }

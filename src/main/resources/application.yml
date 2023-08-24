@@ -30,5 +30,7 @@ spring:
     web:
       pageable:
         size-parameter: pageSize
+        default-page-size: 20
+        max-page-size: 500
       sort:
         sort-parameter: orderBy

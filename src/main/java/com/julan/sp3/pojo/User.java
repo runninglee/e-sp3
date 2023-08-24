@@ -3,6 +3,7 @@ package com.julan.sp3.pojo;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+
 import java.time.LocalDateTime;
 
 @EqualsAndHashCode(callSuper = true)
@@ -20,21 +21,32 @@ public class User extends BaseEntity {
     @Column(name = "mobile")
     private String mobile;
 
+    @Column
     private String password;
 
+    @Column
     private String avatar;
 
+    @Column
     private int role_id;
 
+    @Column
     private String keywords;
 
-    @Column(name = "is_admin")
-    private boolean is_admin;
+    @Column
+    private int is_admin;
 
-    @Column(name = "status")
-    private boolean status;
+    @Column
+    private int status;
 
-    @Column(name = "expired_at")
+
+    @Column
+    private String ip;
+
+    @Column
+    private String location;
+
+    @Column
     @Temporal(TemporalType.TIMESTAMP)
     private LocalDateTime expired_at;
 

@@ -11,6 +11,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.Date;
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -28,12 +30,25 @@ public class CreateUserBo {
     @Pattern(regexp = "^(((13[0-9])|(14[579])|(15([0-3]|[5-9]))|(16[6])|(17[0135678])|(18[0-9])|(19[89]))\\d{8})$", message = "手机号格式错误", groups = MobileGroup.class)
     private String mobile;
 
-    @NotBlank(message = "身份证号不能为空", groups = AvatarGroup.class)
+//    @NotBlank(message = "身份证号不能为空", groups = AvatarGroup.class)
 //    @IdCard(groups = AvatarGroup.class)
-    private String avatar;
+//    private String avatar;
 
     @NotNull(message = "用户状态不能为空", groups = StatusGroup.class)
-    private boolean status;
+    private int status;
+
+    private String avatar;
+
+    private int is_admin;
+
+    private String ip;
+
+    private int role_id;
+
+    private String location;
+
+    private Date created_at;
+
 
 }
 
