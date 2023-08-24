@@ -14,7 +14,7 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("/admin/users")
-public class UserController extends AdminController {
+public class UserController {
 
     @Autowired
     private UserServiceImpl userService;

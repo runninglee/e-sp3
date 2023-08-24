@@ -1,13 +1,12 @@
 package com.julan.sp3.exception;
 
 import com.julan.sp3.util.api.ResultJson;
-import org.hibernate.engine.jdbc.spi.SqlExceptionHelper;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
-import org.springframework.web.servlet.mvc.method.annotation.ExceptionHandlerExceptionResolver;
+import org.springframework.web.servlet.NoHandlerFoundException;
 
 import java.util.List;
 
@@ -15,6 +14,7 @@ import java.util.List;
 public class GraceExceptionHandler {
 
     @ExceptionHandler(GraceException.class)
+
     public ResultJson<Object> handler(GraceException e) {
         return ResultJson.failed(e.getMessage(), e.code);
     }
@@ -41,6 +41,10 @@ public class GraceExceptionHandler {
         return ResultJson.validateFailed(errors.get(0).getDefaultMessage());
     }
 
+    @ExceptionHandler(NoHandlerFoundException.class)
+    public ResultJson<Object> handler(NoHandlerFoundException e) {
+        return ResultJson.failed(e.getMessage(), 404);
+    }
 
     @ExceptionHandler(Exception.class)
     public ResultJson<Object> handler(Exception e) {
