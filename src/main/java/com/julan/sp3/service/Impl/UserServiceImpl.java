@@ -2,11 +2,11 @@ package com.julan.sp3.service.impl;
 
 
 import com.julan.sp3.exception.GraceException;
-import com.julan.sp3.pojo.entity.User;
-import com.julan.sp3.pojo.request.user.CreateUserRequest;
-import com.julan.sp3.pojo.request.user.UpdateUserRequest;
-import com.julan.sp3.pojo.request.user.UserQuery;
-import com.julan.sp3.pojo.vo.user.UserVO;
+import com.julan.sp3.model.entity.User;
+import com.julan.sp3.model.request.user.CreateUserRequest;
+import com.julan.sp3.model.request.user.UpdateUserRequest;
+import com.julan.sp3.model.request.user.UserQuery;
+import com.julan.sp3.model.vo.user.UserVO;
 import com.julan.sp3.repository.user.UserRepository;
 import com.julan.sp3.service.BaseService;
 import com.julan.sp3.util.page.PageUtil;

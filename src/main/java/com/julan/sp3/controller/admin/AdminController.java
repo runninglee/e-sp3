@@ -1,6 +1,6 @@
 package com.julan.sp3.controller.admin;
 
-import com.julan.sp3.pojo.entity.User;
+import com.julan.sp3.model.entity.User;
 import com.julan.sp3.repository.user.UserRepository;
 import com.julan.sp3.util.api.ResultJson;
 import org.springframework.beans.factory.annotation.Autowired;

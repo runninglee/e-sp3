@@ -1,6 +1,6 @@
 package com.julan.sp3.repository.user;
 
-import com.julan.sp3.pojo.entity.User;
+import com.julan.sp3.model.entity.User;
 
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.data.jpa.repository.Query;

@@ -1,7 +1,7 @@
-package com.julan.sp3.pojo.request.user;
+package com.julan.sp3.model.request.user;
 
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
-import com.julan.sp3.pojo.request.BaseQuery;
+import com.julan.sp3.model.request.BaseQuery;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 

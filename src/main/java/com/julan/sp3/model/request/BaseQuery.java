@@ -1,4 +1,4 @@
-package com.julan.sp3.pojo.request;
+package com.julan.sp3.model.request;
 
 import lombok.Data;
 

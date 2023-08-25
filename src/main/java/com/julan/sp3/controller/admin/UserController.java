@@ -1,8 +1,8 @@
 package com.julan.sp3.controller.admin;
 
-import com.julan.sp3.pojo.request.user.*;
+import com.julan.sp3.model.request.user.*;
 import com.julan.sp3.exception.GraceException;
-import com.julan.sp3.pojo.entity.User;
+import com.julan.sp3.model.entity.User;
 import com.julan.sp3.service.impl.UserServiceImpl;
 import com.julan.sp3.util.api.ResultJson;
 

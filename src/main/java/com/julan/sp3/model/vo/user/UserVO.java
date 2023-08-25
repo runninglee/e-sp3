@@ -1,11 +1,11 @@
-package com.julan.sp3.pojo.vo.user;
+package com.julan.sp3.model.vo.user;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
-import com.julan.sp3.pojo.entity.User;
-import com.julan.sp3.pojo.vo.BaseVO;
+import com.julan.sp3.model.entity.User;
+import com.julan.sp3.model.vo.BaseVO;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 

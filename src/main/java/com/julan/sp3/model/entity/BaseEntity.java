@@ -1,4 +1,4 @@
-package com.julan.sp3.pojo.entity;
+package com.julan.sp3.model.entity;
 
 import jakarta.persistence.*;
 
