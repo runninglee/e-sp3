@@ -8,11 +8,11 @@ import com.julan.sp3.pojo.entity.User;
 import com.julan.sp3.pojo.vo.user.UserVO;
 import com.julan.sp3.repository.user.UserRepository;
 import com.julan.sp3.service.BaseService;
+import com.julan.sp3.util.page.PageUtil;
 import jakarta.persistence.criteria.Predicate;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.BeanUtils;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
+import org.springframework.context.annotation.Bean;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
@@ -23,19 +23,20 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 
 @Service
 public class UserServiceImpl implements BaseService {
 
-    @Autowired
-    private UserRepository userRepository;
+    private final UserRepository userRepository;
+    private final ModelMapper modelMapper;
 
-    @Autowired
-    private ModelMapper modelMapper;
+    public UserServiceImpl(UserRepository userRepository, ModelMapper modelMapper) {
+        this.userRepository = userRepository;
+        this.modelMapper = modelMapper;
+    }
 
-    public List<Object> getList(QueryUserBo bo) {
+    public Object getList(QueryUserBo bo) {
         Specification<User> spec = (root, query, cb) -> {
             List<Predicate> predicateList = new ArrayList<>();
             if (bo.getKeywords() != null) {
@@ -48,9 +49,8 @@ public class UserServiceImpl implements BaseService {
             }
             return cb.and(predicateList.toArray(new Predicate[0]));
         };
-        Pageable pageable = PageRequest.of(bo.getPage(), bo.getPageSize(), Sort.by(Sort.Direction.fromString(bo.getDirection()), bo.getOrder()));
-        Page<User> users = userRepository.findAll(spec, pageable);
-        return users.stream().map((user) -> modelMapper.map(user, UserVO.class)).collect(Collectors.toList());
+        Pageable pageable = PageRequest.of(bo.getPage() - 1, bo.getPageSize(), Sort.by(Sort.Direction.fromString(bo.getDirection()), bo.getOrder()));
+        return PageUtil.pretty(userRepository.findAll(spec, pageable), UserVO.class);
     }
 
     public UserVO find(Long id) {
@@ -72,7 +72,7 @@ public class UserServiceImpl implements BaseService {
         if (user == null) {
             GraceException.display("数据不存在");
         }
-        BeanUtils.copyProperties(updateUserBo, user);
+        modelMapper.map(updateUserBo,user);
         return userRepository.save(user);
     }
 

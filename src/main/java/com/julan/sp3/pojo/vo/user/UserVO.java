@@ -5,18 +5,21 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import com.julan.sp3.pojo.entity.User;
+import com.julan.sp3.pojo.vo.BaseVO;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
+
 import java.util.List;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @JsonPropertyOrder(value = {"id", "username", "phone", "status", "created_at", "updated_at"})
-public class UserVO {
+public class UserVO implements BaseVO {
     private long id;
     private String username;
     //输出别名

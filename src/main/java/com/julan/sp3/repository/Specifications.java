@@ -1,17 +1,15 @@
-package com.julan.sp3.repository.user;
+package com.julan.sp3.repository;
 
-
-import com.julan.sp3.pojo.entity.User;
 import org.springframework.data.jpa.domain.Specification;
 
-public class UserSpecifications {
+public class Specifications {
 
-    public static Specification<User> hasKeywords(String keywords) {
+    public static Specification<?> hasKeywords(String keywords) {
         return (root, query, criteriaBuilder) ->
                 criteriaBuilder.like(root.get("keywords"), "%" + keywords + "%");
     }
 
-    public static Specification<User> hasStatus(int status) {
+    public static Specification<?> hasStatus(int status) {
         return (root, query, criteriaBuilder) -> criteriaBuilder.equal(root.get("status"), status);
 
     }
