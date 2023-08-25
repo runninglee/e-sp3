@@ -1,0 +1,12 @@
+custom:
+  name: Custom Name Lee
+  author:
+    - HuHong
+    - Admin
+  users:
+    - name: Hui Lee
+      password: 123456
+      sex: 0
+    - name: Hu Hong
+      password: 654321
+      sex: 1
