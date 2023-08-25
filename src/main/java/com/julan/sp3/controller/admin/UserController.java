@@ -1,12 +1,14 @@
 package com.julan.sp3.controller.admin;
 
-import com.julan.sp3.bo.user.*;
+import com.julan.sp3.pojo.bo.user.*;
 import com.julan.sp3.exception.GraceException;
-import com.julan.sp3.pojo.User;
+import com.julan.sp3.pojo.entity.User;
+import com.julan.sp3.pojo.vo.user.UserVO;
 import com.julan.sp3.service.impl.UserServiceImpl;
 import com.julan.sp3.util.api.ResultJson;
+
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
@@ -21,13 +23,13 @@ public class UserController {
 
     @GetMapping
     @ResponseBody
-    public ResultJson<Page<User>> index(QueryUserBo queryUserBo) {
+    public ResultJson<Object> index(QueryUserBo queryUserBo) {
         return ResultJson.success(userService.getList(queryUserBo));
     }
 
     @GetMapping("/{id}")
     @ResponseBody
-    public ResultJson<User> show(@PathVariable long id) {
+    public ResultJson<Object> show(@PathVariable long id) {
         return ResultJson.success(userService.find(id));
     }
 

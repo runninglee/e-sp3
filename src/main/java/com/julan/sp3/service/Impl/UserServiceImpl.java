@@ -1,13 +1,15 @@
 package com.julan.sp3.service.impl;
 
-import com.julan.sp3.bo.user.CreateUserBo;
-import com.julan.sp3.bo.user.QueryUserBo;
-import com.julan.sp3.bo.user.UpdateUserBo;
+import com.julan.sp3.pojo.bo.user.CreateUserBo;
+import com.julan.sp3.pojo.bo.user.QueryUserBo;
+import com.julan.sp3.pojo.bo.user.UpdateUserBo;
 import com.julan.sp3.exception.GraceException;
-import com.julan.sp3.pojo.User;
+import com.julan.sp3.pojo.entity.User;
+import com.julan.sp3.pojo.vo.user.UserVO;
 import com.julan.sp3.repository.user.UserRepository;
 import com.julan.sp3.service.BaseService;
 import jakarta.persistence.criteria.Predicate;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -21,6 +23,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 
 @Service
@@ -29,8 +32,10 @@ public class UserServiceImpl implements BaseService {
     @Autowired
     private UserRepository userRepository;
 
-    public Page<User> getList(QueryUserBo bo) {
+    @Autowired
+    private ModelMapper modelMapper;
 
+    public List<Object> getList(QueryUserBo bo) {
         Specification<User> spec = (root, query, cb) -> {
             List<Predicate> predicateList = new ArrayList<>();
             if (bo.getKeywords() != null) {
@@ -44,22 +49,21 @@ public class UserServiceImpl implements BaseService {
             return cb.and(predicateList.toArray(new Predicate[0]));
         };
         Pageable pageable = PageRequest.of(bo.getPage(), bo.getPageSize(), Sort.by(Sort.Direction.fromString(bo.getDirection()), bo.getOrder()));
-        return userRepository.findAll(spec, pageable);
+        Page<User> users = userRepository.findAll(spec, pageable);
+        return users.stream().map((user) -> modelMapper.map(user, UserVO.class)).collect(Collectors.toList());
     }
 
-    public User find(Long id) {
+    public UserVO find(Long id) {
         User user = userRepository.findById(id).orElse(null);
         if (user == null) {
             GraceException.display("数据不存在");
         }
-        return user;
+        return modelMapper.map(user, UserVO.class);
     }
 
     @Transactional(propagation = Propagation.SUPPORTS)
     public User create(CreateUserBo createUserBo) {
-        User user = new User();
-        BeanUtils.copyProperties(createUserBo, user);
-        return userRepository.save(user);
+        return userRepository.save(modelMapper.map(createUserBo, User.class));
     }
 
     @Transactional(propagation = Propagation.SUPPORTS)

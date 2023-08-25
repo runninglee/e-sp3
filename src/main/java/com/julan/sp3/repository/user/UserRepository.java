@@ -1,9 +1,7 @@
 package com.julan.sp3.repository.user;
 
-import com.julan.sp3.pojo.User;
+import com.julan.sp3.pojo.entity.User;
 
-import jakarta.persistence.EntityManager;
-import jakarta.persistence.PersistenceContext;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;

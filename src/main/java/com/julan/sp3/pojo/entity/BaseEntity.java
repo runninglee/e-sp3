@@ -1,4 +1,4 @@
-package com.julan.sp3.pojo;
+package com.julan.sp3.pojo.entity;
 
 import jakarta.persistence.*;
 
@@ -17,7 +17,7 @@ public abstract class BaseEntity {
 
     @CreatedDate
     @Temporal(TemporalType.TIMESTAMP)
-    @Column(nullable = false, updatable = false)
+    @Column(updatable = false)
     private LocalDateTime created_at;
 
     @LastModifiedDate

@@ -1,4 +1,4 @@
-package com.julan.sp3.pojo;
+package com.julan.sp3.pojo.entity;
 
 import jakarta.persistence.*;
 import lombok.Data;
@@ -53,13 +53,12 @@ public class User extends BaseEntity {
     @PrePersist
     protected void onCreate() {
         keywords = username + mobile;
-        expired_at = LocalDateTime.now();
+        expired_at = LocalDateTime.now().plusDays(30);
     }
 
     @PreUpdate
     protected void onUpdate() {
         keywords = username + mobile;
-        expired_at = LocalDateTime.now();
     }
 
     @PreRemove

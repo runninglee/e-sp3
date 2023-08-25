@@ -1,7 +1,7 @@
 package com.julan.sp3.repository.user;
 
 
-import com.julan.sp3.pojo.User;
+import com.julan.sp3.pojo.entity.User;
 import org.springframework.data.jpa.domain.Specification;
 
 public class UserSpecifications {

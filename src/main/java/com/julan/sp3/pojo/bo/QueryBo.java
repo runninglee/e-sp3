@@ -1,4 +1,4 @@
-package com.julan.sp3.bo;
+package com.julan.sp3.pojo.bo;
 
 import lombok.Data;
 
