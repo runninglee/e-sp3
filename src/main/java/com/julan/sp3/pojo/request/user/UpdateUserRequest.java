@@ -1,9 +1,9 @@
-package com.julan.sp3.pojo.bo.user;
+package com.julan.sp3.pojo.request.user;
 
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
-import com.julan.sp3.pojo.bo.user.group.MobileGroup;
-import com.julan.sp3.pojo.bo.user.group.StatusGroup;
-import com.julan.sp3.pojo.bo.user.group.UsernameGroup;
+import com.julan.sp3.pojo.request.user.group.MobileGroup;
+import com.julan.sp3.pojo.request.user.group.StatusGroup;
+import com.julan.sp3.pojo.request.user.group.UsernameGroup;
 import com.julan.sp3.util.validator.Mobile.Mobile;
 import jakarta.persistence.Id;
 import jakarta.validation.constraints.NotBlank;
@@ -14,13 +14,12 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
-import java.util.Date;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @JsonPropertyOrder(value = {"username", "password", "mobile", "status"})
-public class UpdateUserBo {
+public class UpdateUserRequest {
 
     @Id
     private long id;

@@ -1,18 +1,17 @@
 package com.julan.sp3.service.impl;
 
-import com.julan.sp3.pojo.bo.user.CreateUserBo;
-import com.julan.sp3.pojo.bo.user.QueryUserBo;
-import com.julan.sp3.pojo.bo.user.UpdateUserBo;
+
 import com.julan.sp3.exception.GraceException;
 import com.julan.sp3.pojo.entity.User;
+import com.julan.sp3.pojo.request.user.CreateUserRequest;
+import com.julan.sp3.pojo.request.user.UpdateUserRequest;
+import com.julan.sp3.pojo.request.user.UserQuery;
 import com.julan.sp3.pojo.vo.user.UserVO;
 import com.julan.sp3.repository.user.UserRepository;
 import com.julan.sp3.service.BaseService;
 import com.julan.sp3.util.page.PageUtil;
 import jakarta.persistence.criteria.Predicate;
 import org.modelmapper.ModelMapper;
-import org.springframework.beans.BeanUtils;
-import org.springframework.context.annotation.Bean;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
@@ -36,20 +35,20 @@ public class UserServiceImpl implements BaseService {
         this.modelMapper = modelMapper;
     }
 
-    public Object getList(QueryUserBo bo) {
+    public Object getList(UserQuery userQuery) {
         Specification<User> spec = (root, query, cb) -> {
             List<Predicate> predicateList = new ArrayList<>();
-            if (bo.getKeywords() != null) {
-                Predicate whereKeywords = cb.like(root.get("keywords"), "%" + bo.getKeywords() + "%");
+            if (userQuery.getKeywords() != null) {
+                Predicate whereKeywords = cb.like(root.get("keywords"), "%" + userQuery.getKeywords() + "%");
                 predicateList.add(whereKeywords);
             }
-            if (bo.getStatus() >= 0) {
-                Predicate whereStatus = cb.equal(root.get("status"), bo.getStatus());
+            if (userQuery.getStatus() >= 0) {
+                Predicate whereStatus = cb.equal(root.get("status"), userQuery.getStatus());
                 predicateList.add(whereStatus);
             }
             return cb.and(predicateList.toArray(new Predicate[0]));
         };
-        Pageable pageable = PageRequest.of(bo.getPage() - 1, bo.getPageSize(), Sort.by(Sort.Direction.fromString(bo.getDirection()), bo.getOrder()));
+        Pageable pageable = PageRequest.of(userQuery.getPage() - 1, userQuery.getPageSize(), Sort.by(Sort.Direction.fromString(userQuery.getDirection()), userQuery.getOrder()));
         return PageUtil.pretty(userRepository.findAll(spec, pageable), UserVO.class);
     }
 
@@ -62,17 +61,17 @@ public class UserServiceImpl implements BaseService {
     }
 
     @Transactional(propagation = Propagation.SUPPORTS)
-    public User create(CreateUserBo createUserBo) {
-        return userRepository.save(modelMapper.map(createUserBo, User.class));
+    public User create(CreateUserRequest createRequest) {
+        return userRepository.save(modelMapper.map(createRequest, User.class));
     }
 
     @Transactional(propagation = Propagation.SUPPORTS)
-    public User update(UpdateUserBo updateUserBo) {
-        User user = userRepository.findById(updateUserBo.getId()).orElse(null);
+    public User update(UpdateUserRequest updateRequest) {
+        User user = userRepository.findById(updateRequest.getId()).orElse(null);
         if (user == null) {
             GraceException.display("数据不存在");
         }
-        modelMapper.map(updateUserBo,user);
+        modelMapper.map(updateRequest,user);
         return userRepository.save(user);
     }
 

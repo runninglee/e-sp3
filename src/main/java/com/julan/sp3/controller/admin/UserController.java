@@ -1,16 +1,12 @@
 package com.julan.sp3.controller.admin;
 
-import com.julan.sp3.pojo.bo.user.*;
+import com.julan.sp3.pojo.request.user.*;
 import com.julan.sp3.exception.GraceException;
 import com.julan.sp3.pojo.entity.User;
-import com.julan.sp3.pojo.vo.user.UserVO;
 import com.julan.sp3.service.impl.UserServiceImpl;
 import com.julan.sp3.util.api.ResultJson;
 
-import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.configurationprocessor.json.JSONException;
-import org.springframework.context.annotation.Bean;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
@@ -25,8 +21,8 @@ public class UserController {
 
     @GetMapping
     @ResponseBody
-    public ResultJson<Object> index(QueryUserBo queryUserBo)  {
-        return ResultJson.success(userService.getList(queryUserBo));
+    public ResultJson<Object> index(UserQuery userQuery)  {
+        return ResultJson.success(userService.getList(userQuery));
     }
 
     @GetMapping("/{id}")
@@ -37,15 +33,15 @@ public class UserController {
 
     @PostMapping
     @ResponseBody
-    public ResultJson<User> store(@Validated(CreateUserBoGroup.class) CreateUserBo createUserBo) {
-        return ResultJson.success(userService.create(createUserBo));
+    public ResultJson<User> store(@Validated(CreateUserGroup.class) CreateUserRequest createRequest) {
+        return ResultJson.success(userService.create(createRequest));
     }
 
     @PutMapping("/{id}")
     @ResponseBody
-    public ResultJson<User> update(@PathVariable long id, @Validated(UpdateUserBoGroup.class) UpdateUserBo updateUserBo) {
-        updateUserBo.setId(id);
-        return ResultJson.success(userService.update(updateUserBo));
+    public ResultJson<User> update(@PathVariable long id, @Validated(UpdateUserGroup.class) UpdateUserRequest updateRequest) {
+        updateRequest.setId(id);
+        return ResultJson.success(userService.update(updateRequest));
     }
 
     @DeleteMapping("/{id}")

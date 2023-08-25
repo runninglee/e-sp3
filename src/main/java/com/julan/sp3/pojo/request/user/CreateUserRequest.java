@@ -1,7 +1,7 @@
-package com.julan.sp3.pojo.bo.user;
+package com.julan.sp3.pojo.request.user;
 
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
-import com.julan.sp3.pojo.bo.user.group.*;
+import com.julan.sp3.pojo.request.user.group.*;
 import com.julan.sp3.util.validator.Mobile.Mobile;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -16,7 +16,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 @JsonPropertyOrder(value = {"username", "password", "status", "mobile"})
-public class CreateUserBo {
+public class CreateUserRequest {
 
     @NotBlank(message = "用户名不能为空", groups = UsernameGroup.class)
     private String username;

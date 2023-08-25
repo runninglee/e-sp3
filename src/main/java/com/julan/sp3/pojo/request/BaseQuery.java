@@ -1,10 +1,10 @@
-package com.julan.sp3.pojo.bo;
+package com.julan.sp3.pojo.request;
 
 import lombok.Data;
 
 @Data
-public abstract class QueryBo {
-    public int page = 0;
+public abstract class BaseQuery {
+    public int page = 1;
     public int pageSize = 20;
     public String order = "id";
     public String direction = "desc";
