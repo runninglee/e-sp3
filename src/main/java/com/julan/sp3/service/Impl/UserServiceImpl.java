@@ -12,6 +12,7 @@ import com.julan.sp3.service.BaseService;
 import com.julan.sp3.util.page.PageUtil;
 import jakarta.persistence.criteria.Predicate;
 import org.modelmapper.ModelMapper;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
@@ -52,6 +53,7 @@ public class UserServiceImpl implements BaseService {
         return PageUtil.pretty(userRepository.findAll(spec, pageable), UserVO.class);
     }
 
+//    @Cacheable(value = "user", key = "#id")
     public UserVO find(Long id) {
         User user = userRepository.findById(id).orElse(null);
         if (user == null) {
@@ -71,7 +73,7 @@ public class UserServiceImpl implements BaseService {
         if (user == null) {
             GraceException.display("数据不存在");
         }
-        modelMapper.map(updateRequest,user);
+        modelMapper.map(updateRequest, user);
         return userRepository.save(user);
     }
 
