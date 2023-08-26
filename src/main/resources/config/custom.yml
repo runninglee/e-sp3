@@ -1,8 +1,8 @@
 custom:
   name: Custom Name Lee
-  lee:
-    - HuHong
-    - Admin
+  author:
+    - Huhong
+    - HuiLee
   users:
     - name: Hui Lee
       password: 123456
