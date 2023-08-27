@@ -5,11 +5,11 @@ import lombok.Getter;
 import org.springframework.context.ApplicationEvent;
 
 @Getter
-public class SendMessageEvent extends ApplicationEvent {
+public class CreateUserEvent extends ApplicationEvent {
 
     private final User user;
 
-    public SendMessageEvent(Object source, User user) {
+    public CreateUserEvent(Object source, User user) {
         super(source);
         this.user = user;
     }

@@ -1,8 +1,7 @@
 package com.julan.sp3.service.impl;
 
 
-import com.julan.sp3.event.SendEmailEvent;
-import com.julan.sp3.event.SendMessageEvent;
+import com.julan.sp3.event.CreateUserEvent;
 import com.julan.sp3.exception.GraceException;
 import com.julan.sp3.model.entity.User;
 import com.julan.sp3.model.request.user.CreateUserRequest;
@@ -71,8 +70,7 @@ public class UserServiceImpl implements BaseService {
     @Transactional(propagation = Propagation.SUPPORTS)
     public User create(CreateUserRequest createRequest) {
         User user = userRepository.save(modelMapper.map(createRequest, User.class));
-        applicationContext.publishEvent(new SendEmailEvent(this, user));
-        applicationContext.publishEvent(new SendMessageEvent(this, user));
+        applicationContext.publishEvent(new CreateUserEvent(this, user));
         return user;
     }
 
