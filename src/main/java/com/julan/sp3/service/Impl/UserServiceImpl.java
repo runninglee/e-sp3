@@ -1,6 +1,8 @@
 package com.julan.sp3.service.impl;
 
 
+import com.julan.sp3.event.SendEmailEvent;
+import com.julan.sp3.event.SendMessageEvent;
 import com.julan.sp3.exception.GraceException;
 import com.julan.sp3.model.entity.User;
 import com.julan.sp3.model.request.user.CreateUserRequest;
@@ -12,7 +14,8 @@ import com.julan.sp3.service.BaseService;
 import com.julan.sp3.util.page.PageUtil;
 import jakarta.persistence.criteria.Predicate;
 import org.modelmapper.ModelMapper;
-import org.springframework.cache.annotation.Cacheable;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
@@ -30,6 +33,9 @@ public class UserServiceImpl implements BaseService {
 
     private final UserRepository userRepository;
     private final ModelMapper modelMapper;
+
+    @Autowired
+    private ApplicationContext applicationContext;
 
     public UserServiceImpl(UserRepository userRepository, ModelMapper modelMapper) {
         this.userRepository = userRepository;
@@ -64,7 +70,10 @@ public class UserServiceImpl implements BaseService {
 
     @Transactional(propagation = Propagation.SUPPORTS)
     public User create(CreateUserRequest createRequest) {
-        return userRepository.save(modelMapper.map(createRequest, User.class));
+        User user = userRepository.save(modelMapper.map(createRequest, User.class));
+        applicationContext.publishEvent(new SendEmailEvent(this, user));
+        applicationContext.publishEvent(new SendMessageEvent(this, user));
+        return user;
     }
 
     @Transactional(propagation = Propagation.SUPPORTS)
