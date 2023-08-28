@@ -1,4 +1,4 @@
-package com.julan.sp3.service.impl;
+package com.julan.sp3.service.impl.user;
 
 
 import com.julan.sp3.event.CreateUserEvent;
