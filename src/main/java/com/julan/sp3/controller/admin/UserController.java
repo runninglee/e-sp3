@@ -6,7 +6,7 @@ import com.julan.sp3.model.entity.User;
 import com.julan.sp3.service.impl.user.UserServiceImpl;
 import com.julan.sp3.util.api.ResultJson;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import jakarta.annotation.Resource;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
@@ -16,12 +16,12 @@ import java.util.Map;
 @RequestMapping("/admin/users")
 public class UserController {
 
-    @Autowired
+    @Resource
     private UserServiceImpl userService;
 
     @GetMapping
     @ResponseBody
-    public ResultJson<Object> index(UserQuery userQuery)  {
+    public ResultJson<Object> index(UserQuery userQuery) {
         return ResultJson.success(userService.getList(userQuery));
     }
 

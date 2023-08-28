@@ -11,9 +11,11 @@ import com.julan.sp3.model.vo.user.UserVO;
 import com.julan.sp3.repository.user.UserRepository;
 import com.julan.sp3.service.BaseService;
 import com.julan.sp3.util.page.PageUtil;
+import jakarta.annotation.Resource;
 import jakarta.persistence.criteria.Predicate;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.context.ApplicationContext;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -30,16 +32,13 @@ import java.util.List;
 @Service
 public class UserServiceImpl implements BaseService {
 
-    private final UserRepository userRepository;
-    private final ModelMapper modelMapper;
-
-    @Autowired
+    @Resource
+    private UserRepository userRepository;
+    @Resource
+    private ModelMapper modelMapper;
+    @Resource
     private ApplicationContext applicationContext;
 
-    public UserServiceImpl(UserRepository userRepository, ModelMapper modelMapper) {
-        this.userRepository = userRepository;
-        this.modelMapper = modelMapper;
-    }
 
     public Object getList(UserQuery userQuery) {
         Specification<User> spec = (root, query, cb) -> {

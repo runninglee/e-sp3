@@ -4,6 +4,7 @@ import com.julan.sp3.config.CustomConfig;
 import com.julan.sp3.model.entity.User;
 import com.julan.sp3.repository.user.UserRepository;
 import com.julan.sp3.util.api.ResultJson;
+import jakarta.annotation.Resource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,14 +18,12 @@ import java.util.List;
 @RequestMapping("/admin/t")
 public class AdminController {
 
-    private final UserRepository userRepository;
+    @Resource
+    private UserRepository userRepository;
 
-    private final CustomConfig customConfig;
+    @Resource
+    private CustomConfig customConfig;
 
-    public AdminController(UserRepository userRepository, CustomConfig customConfig) {
-        this.userRepository = userRepository;
-        this.customConfig = customConfig;
-    }
 
     @GetMapping
     @ResponseBody
