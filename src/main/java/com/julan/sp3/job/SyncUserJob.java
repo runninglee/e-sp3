@@ -13,23 +13,29 @@ import java.util.HashMap;
 
 @Component
 @Slf4j
-public class CreateUserJob {
+public class SyncUserJob {
 
-    private static final String QUEUE_ROUTE_KEY = "user";
+    //第一步: 声明队列名称
+    private static final String JOB_NAME = "user";
+    //定义交换机、队列、路由
+    private static final String EXCHANGE = "amq.direct";
+    private static final String QUEUE = JOB_NAME;
+    private static final String ROUTE_KEY = JOB_NAME;
 
     @Resource
     private AmqpTemplate amqpTemplate;
 
-    public void dispatch(String id) {
+    //第二步: 触发任务
+    public void dispatch(String jobId) {
         HashMap<String, String> hashMap = new HashMap<>();
-        hashMap.put("id", id);
-        amqpTemplate.convertAndSend(QUEUE_ROUTE_KEY, hashMap);
+        hashMap.put("jobId", jobId);
+        amqpTemplate.convertAndSend(ROUTE_KEY, hashMap);
     }
 
-
-    @RabbitListener(bindings = @QueueBinding(value = @Queue(QUEUE_ROUTE_KEY), exchange = @Exchange(name = "amq.direct"), key = QUEUE_ROUTE_KEY))
+    //第三步: 监听任务
+    @RabbitListener(bindings = @QueueBinding(value = @Queue(QUEUE), exchange = @Exchange(name = EXCHANGE), key = ROUTE_KEY))
     public void execute(HashMap<?, ?> map) {
         //在这里处理业务即可
-        log.info("RabbitMQ User: {}", map.get("id"));
+        log.info("RabbitMQ User: {}", map.get("jobId"));
     }
 }
