@@ -15,25 +15,14 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/admin/queue")
 public class QueueController {
 
-
-    @Resource
-    private UserRepository userRepository;
-
     @Resource
     private CreateDelayRoleJob createRoleJob;
-
-
-    @Resource
-    private CreateUserJob createUserJob;
-
+    
 
     @GetMapping
     @ResponseBody
     public ResultJson<Object> index() {
-
-//        userRepository.findById(2L).ifPresent(user -> createUserJob.dispatch(user.getId().toString()));
-
-        createRoleJob.dispatch("Role is coming...");
+        createRoleJob.dispatch("Role is coming...", 5);
         return ResultJson.success();
     }
 
