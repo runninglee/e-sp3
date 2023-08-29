@@ -15,7 +15,7 @@ import java.util.HashMap;
 @Slf4j
 public class CreateUserJob {
 
-    private static final String QueueRoutingKey = "user";
+    private static final String QUEUE_ROUTE_KEY = "user";
 
     @Resource
     private AmqpTemplate amqpTemplate;
@@ -23,11 +23,11 @@ public class CreateUserJob {
     public void dispatch(String id) {
         HashMap<String, String> hashMap = new HashMap<>();
         hashMap.put("id", id);
-        amqpTemplate.convertAndSend(QueueRoutingKey, hashMap);
+        amqpTemplate.convertAndSend(QUEUE_ROUTE_KEY, hashMap);
     }
 
 
-    @RabbitListener(bindings = @QueueBinding(value = @Queue(QueueRoutingKey), exchange = @Exchange(name = "amq.direct"), key = QueueRoutingKey))
+    @RabbitListener(bindings = @QueueBinding(value = @Queue(QUEUE_ROUTE_KEY), exchange = @Exchange(name = "amq.direct"), key = QUEUE_ROUTE_KEY))
     public void execute(HashMap<?, ?> map) {
         //在这里处理业务即可
         log.info("RabbitMQ User: {}", map.get("id"));
