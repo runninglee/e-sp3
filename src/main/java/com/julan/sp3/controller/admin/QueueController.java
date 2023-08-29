@@ -31,14 +31,9 @@ public class QueueController {
 
     @GetMapping
     @ResponseBody
-    public ResultJson<Object> index() throws JsonProcessingException {
+    public ResultJson<Object> index() {
 
-        User user = userRepository.findById(2L).orElse(null);
-
-        if(user != null){
-            createUserJob.dispatch(user);
-        }
-
+        userRepository.findById(2L).ifPresent(user -> createUserJob.dispatch(user.getId().toString()));
 
 
         createRoleJob.dispatch("Role is coming...");
