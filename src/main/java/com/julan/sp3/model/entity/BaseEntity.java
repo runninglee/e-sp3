@@ -15,7 +15,7 @@ import java.time.LocalDateTime;
 @Getter
 @Setter
 @EntityListeners(value = AuditingEntityListener.class)
-public abstract class BaseEntity {
+public  class BaseEntity {
 
     @CreatedDate
     @Temporal(TemporalType.TIMESTAMP)

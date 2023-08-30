@@ -1,7 +1,5 @@
 package com.julan.sp3.service.impl.user;
 
-
-import com.julan.sp3.annotation.BoolPermission;
 import com.julan.sp3.event.CreateUserEvent;
 import com.julan.sp3.exception.GraceException;
 import com.julan.sp3.model.entity.User;
@@ -11,9 +9,17 @@ import com.julan.sp3.model.request.user.UserQuery;
 import com.julan.sp3.model.vo.user.UserVO;
 import com.julan.sp3.repository.user.UserRepository;
 import com.julan.sp3.service.BaseService;
+import com.julan.sp3.util.api.ResultJson;
 import com.julan.sp3.util.page.PageUtil;
 import jakarta.annotation.Resource;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.PersistenceContext;
+import jakarta.persistence.Query;
+import jakarta.persistence.TypedQuery;
+import jakarta.persistence.criteria.CriteriaBuilder;
+import jakarta.persistence.criteria.CriteriaQuery;
 import jakarta.persistence.criteria.Predicate;
+import jakarta.persistence.criteria.Root;
 import org.modelmapper.ModelMapper;
 import org.springframework.context.ApplicationContext;
 import org.springframework.data.domain.PageRequest;
@@ -25,6 +31,7 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 @Service
@@ -36,6 +43,10 @@ public class UserServiceImpl implements BaseService {
     private ModelMapper modelMapper;
     @Resource
     private ApplicationContext applicationContext;
+
+
+    @PersistenceContext
+    EntityManager entityManager;
 
 
     public Object getList(UserQuery userQuery) {
@@ -91,12 +102,16 @@ public class UserServiceImpl implements BaseService {
     }
 
     //获取布尔权限
-    public boolean hasBoolPermission(String permission) {
+    public boolean hasHandlePermission(String permission) {
         return permission.equals("user.create");
     }
 
     //获取数据权限
-    public boolean hasDataPermission(String permission) {
+    public boolean hasDataPermission(String permission, String entity) {
+
+        Query query = entityManager.createNativeQuery("select * FROM user");
+        System.out.println(query.getFirstResult());
+
         return permission.equals("user.list");
     }
 
