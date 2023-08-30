@@ -1,6 +1,7 @@
 package com.julan.sp3.service.impl.user;
 
 
+import com.julan.sp3.annotation.BoolPermission;
 import com.julan.sp3.event.CreateUserEvent;
 import com.julan.sp3.exception.GraceException;
 import com.julan.sp3.model.entity.User;
@@ -88,4 +89,15 @@ public class UserServiceImpl implements BaseService {
         }
         userRepository.deleteById(id);
     }
+
+    //获取布尔权限
+    public boolean hasBoolPermission(String permission) {
+        return permission.equals("user.create");
+    }
+
+    //获取数据权限
+    public boolean hasDataPermission(String permission) {
+        return permission.equals("user.list");
+    }
+
 }

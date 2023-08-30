@@ -9,8 +9,4 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.RUNTIME)
 public @interface DataPermission {
     String value() default "";
-
-    String category() default "";
-
-    String id() default "";
 }
