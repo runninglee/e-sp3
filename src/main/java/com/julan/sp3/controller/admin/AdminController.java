@@ -5,7 +5,6 @@ import com.julan.sp3.model.entity.User;
 import com.julan.sp3.repository.user.UserRepository;
 import com.julan.sp3.util.api.ResultJson;
 import jakarta.annotation.Resource;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;

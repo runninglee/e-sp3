@@ -14,8 +14,6 @@ import com.julan.sp3.util.page.PageUtil;
 import jakarta.annotation.Resource;
 import jakarta.persistence.criteria.Predicate;
 import org.modelmapper.ModelMapper;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cache.annotation.Cacheable;
 import org.springframework.context.ApplicationContext;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -27,7 +25,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
-
 
 @Service
 public class UserServiceImpl implements BaseService {

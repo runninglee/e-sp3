@@ -5,7 +5,6 @@ import com.julan.sp3.job.DelayUserJob;
 import com.julan.sp3.job.SyncUserJob;
 import com.julan.sp3.util.api.ResultJson;
 import jakarta.annotation.Resource;
-
 import org.springframework.web.bind.annotation.*;
 
 @RestController
