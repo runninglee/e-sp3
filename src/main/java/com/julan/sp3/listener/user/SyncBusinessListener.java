@@ -3,7 +3,6 @@ package com.julan.sp3.listener.user;
 import com.julan.sp3.event.CreateUserEvent;
 import com.julan.sp3.model.entity.User;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.EventListener;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Service;
