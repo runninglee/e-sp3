@@ -20,6 +20,7 @@ import jakarta.persistence.criteria.CriteriaBuilder;
 import jakarta.persistence.criteria.CriteriaQuery;
 import jakarta.persistence.criteria.Predicate;
 import jakarta.persistence.criteria.Root;
+import org.hibernate.transform.Transformers;
 import org.modelmapper.ModelMapper;
 import org.springframework.context.ApplicationContext;
 import org.springframework.data.domain.PageRequest;
@@ -31,7 +32,6 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 @Service
@@ -43,10 +43,6 @@ public class UserServiceImpl implements BaseService {
     private ModelMapper modelMapper;
     @Resource
     private ApplicationContext applicationContext;
-
-
-    @PersistenceContext
-    EntityManager entityManager;
 
 
     public Object getList(UserQuery userQuery) {
@@ -109,8 +105,7 @@ public class UserServiceImpl implements BaseService {
     //获取数据权限
     public boolean hasDataPermission(String permission, String entity) {
 
-        Query query = entityManager.createNativeQuery("select * FROM user");
-        System.out.println(query.getFirstResult());
+
 
         return permission.equals("user.list");
     }
