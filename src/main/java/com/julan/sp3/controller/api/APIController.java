@@ -33,8 +33,8 @@ public class APIController {
     @PostMapping
     @ResponseBody
     @DataPermission(value = "user.list", entity = "User")
-    public ResultJson<Object> store() {
-        List<Map<String, Object>> users = jdbcTemplate.queryForList("Select * from user where keywords like ?", "%HuiLee%");
+    public ResultJson<Object> store(@RequestParam String name) {
+        List<Map<String, Object>> users = jdbcTemplate.queryForList("Select * from user where keywords like ?", "%" + name + "%");
         return ResultJson.success(users);
     }
 }
