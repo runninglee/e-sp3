@@ -11,6 +11,7 @@ import java.security.NoSuchAlgorithmException;
 import java.util.List;
 import java.util.Map;
 import java.security.InvalidKeyException;
+import com.julan.sp3.util.safety.SafetyUtil;
 
 @RestController
 @RequestMapping("/api/t")
@@ -24,7 +25,7 @@ public class APIController {
     @HandlePermission("user.create")
     public ResultJson<Object> index(@RequestParam Map<String, Object> params) throws NoSuchAlgorithmException, InvalidKeyException {
 //        return ResultJson.success(HashMacUtil.hashMac("3226ff1362636fb2e1ae64ace264baeb","9lqcpao1rr5hdkgwhvb6gs4peqcouvqu"));
-//        return ResultJson.success(HashMacUtil.md5("HuiLee"));
+        return ResultJson.success(SafetyUtil.md5("HuiLee"));
     }
 
     @PostMapping

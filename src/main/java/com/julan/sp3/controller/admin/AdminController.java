@@ -40,4 +40,10 @@ public class AdminController {
         return ResultJson.success(hashMap);
     }
 
+    @GetMapping("/json")
+    @ResponseBody
+    public ResultJson<Object> json() {
+        return ResultJson.success();
+    }
+
 }
